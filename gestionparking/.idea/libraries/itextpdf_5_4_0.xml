@@ -1,0 +1,17 @@
+<component name="libraryTable">
+  <library name="itextpdf-5.4.0">
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/itextpdf-5.4.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/AbsoluteLayout.jar!/" />
+      <root url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/javafx" />
+      <root url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/jar_sun.Text.normalizer" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES>
+      <root url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/slf4j-api-2.0.0-alpha7-sources" />
+      <root url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/jar_sun.Text.normalizer" />
+    </SOURCES>
+    <jarDirectory url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/jar_sun.Text.normalizer" recursive="false" />
+    <jarDirectory url="file://$PROJECT_DIR$/../../../LIBRERIAS JAVA NECESARIAS/jar_sun.Text.normalizer" recursive="false" type="SOURCES" />
+  </library>
+</component>
