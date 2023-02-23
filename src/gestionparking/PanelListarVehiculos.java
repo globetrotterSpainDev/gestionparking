@@ -43,7 +43,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         columnModel.getColumn(3).setPreferredWidth(100);
         columnModel.getColumn(4).setPreferredWidth(100);
         columnModel.getColumn(5).setPreferredWidth(100);
-        columnModel.getColumn(6).setPreferredWidth(100);
+        columnModel.getColumn(6).setPreferredWidth(100);// revisar si el número 6
     }
 
     /**
@@ -234,7 +234,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
             if (cbMoto.isSelected()) {
                 tipoVehiculo = "";
             } else {
-                tipoVehiculo = "Coche";
+                tipoVehiculo = "Automovil";
             }
         } else if (cbMoto.isSelected()) {
             tipoVehiculo = "Motocicleta";
@@ -245,7 +245,9 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         }
         if (rbEnParq.isSelected()) {
             estado = "Disponible";
+
         }
+        //Busqueda por fecha
         if (dcFechaBusqueda.getDate() != null) {
             DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
             Date date = dcFechaBusqueda.getDate();
@@ -255,10 +257,10 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         try {
             // TODO add your handling code here:
 
-            Class.forName("com.mysql.jdbc.Driver");
+            Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/gestionparkingbd", "root", "");
             Statement stat = con.createStatement();
-            consulta = "SELECT * FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND vehiculos.matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horaentrada LIKE '" + fecha + "%'";
+            consulta = "SELECT * FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horaentrada LIKE '" + fecha + "%'";
             System.out.println(consulta);
             ResultSet rs = stat.executeQuery(consulta);
             rs.next();//cambiado por first ya que solo se mueve de registro  en registro y no hacia el primero
@@ -272,7 +274,8 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
                 horasalida = "No ha salido";
                    pago = "0";
                    JOptionPane.showMessageDialog(null, "No ha salido del parking, por favor revise");
-                  return;  // si no hay nada que mostrar retorne el programa
+
+                 // SI ALGUN VEHICULO O MOTO SALIÓ PÍNTELO
                 } else {
                     horasalida = rs.getString(6).substring(10).substring(0,6);
                     pago = rs.getString(7);
@@ -281,12 +284,15 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
                 modelo.addRow(fila);
             } while (rs.next());// repita mientras haya datos de fecha de consulta
 
+
+
         } catch (ClassNotFoundException ex) {
             Logger.getLogger(PanelListarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
         } catch (SQLException ex) {
             Logger.getLogger(PanelListarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
 
         }
+      //   return;  // si no hay nada que mostrar retorne el programa
     }//GEN-LAST:event_btnBuscarActionPerformed
 
     private void rbFueraParqActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rbFueraParqActionPerformed
@@ -300,7 +306,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
             Class.forName("com.mysql.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/gestionparkingbd", "root", "");
             Statement stat = con.createStatement();
-            consulta = "SELECT SUM(valorapagar)FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND matricula LIKE '%" + tfMatricula.getText() + "%' 			AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horasalida LIKE '" + fecha + "%'";
+            consulta = "SELECT SUM(valorapagar)FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horasalida LIKE '" + fecha + "%'";
             ResultSet rs = stat.executeQuery(consulta);
             rs.next();  //cambiado por first que da error y no lista y no da el total del dia ingresado----
             DecimalFormat df = new DecimalFormat("#.00");  //SOLO DEBERA UTILIZAR DOS DECIMALES
@@ -312,7 +318,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
         } catch (SQLException ex) {
             Logger.getLogger(PanelListarVehiculos.class.getName()).log(Level.SEVERE, null, ex);
 
-            return;  // aumentado para que retorne al programa sin devolver nada.
+           // return;  // aumentado para que retorne al programa sin devolver nada.
         }
 
 

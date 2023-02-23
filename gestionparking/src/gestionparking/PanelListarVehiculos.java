@@ -246,7 +246,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
             Class.forName("com.mysql.cj.jdbc.Driver");
             Connection con = DriverManager.getConnection("jdbc:mysql://localhost/gestionparkingbd", "root", "");
             Statement stat = con.createStatement();
-            consulta = "SELECT * FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND vehiculos.matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horaentrada LIKE '" + fecha + "%'";
+            consulta = "SELECT * FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horaentrada LIKE '" + fecha + "%'";
             System.out.println(consulta);
             ResultSet rs = stat.executeQuery(consulta);
             rs.next();//cambiado por first ya que solo se mueve de registro  en registro y no hacia el primero
@@ -287,7 +287,7 @@ public class PanelListarVehiculos extends javax.swing.JPanel {
             Statement stat = con.createStatement();
             consulta = "SELECT SUM(valorapagar)FROM vehiculos WHERE estado='" + estado + "' AND tipovehiculo LIKE'%" + tipoVehiculo + "%' AND matricula LIKE '%" + tfMatricula.getText() + "%' AND propietario LIKE '%" + tfPropietario.getText() + "%' AND horasalida LIKE '" + fecha + "%'";
             ResultSet rs = stat.executeQuery(consulta);
-            rs.next();  //cambiado por first que da error y no lista y no da el total del dia ingresado----
+            rs.first();  //cambiado por first que da error y no lista y no da el total del dia ingresado----
             DecimalFormat df = new DecimalFormat("#.00");  //SOLO DEBERA UTILIZAR DOS DECIMALES
             Double IngresosTotales = Double.parseDouble(rs.getString(1));
             JOptionPane.showMessageDialog(null, "El ingreso total del día que Ud. ha  seleccionado es de : €   " + df.format(IngresosTotales) +    "Euros");
